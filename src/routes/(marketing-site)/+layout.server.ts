@@ -1,7 +1,7 @@
-import { getStoryblok } from '$lib/storyblok';
 import type { ConfigurationStoryblok } from '$types/bloks';
 import type { ISbStoryData } from '@storyblok/js';
 import {
+  fetchConfiguration,
   fetchAwards,
   fetchAwardsTypes,
   fetchCareers,
@@ -11,16 +11,11 @@ import {
 
 export const load = async ({ locals, fetch }) => {
   const version = locals.version;
-  const storyblok = getStoryblok({ fetch });
 
-  const res = await storyblok.get('cdn/stories/configuration', {
-    version,
-    resolve_relations:
-      'configuration.primary_navigation,configuration.secondary_navigation,footer-column-internal.links'
-  });
+  const configRes = await fetchConfiguration({ version, fetch });
 
   return {
-    configuration: res.data.story as ISbStoryData<ConfigurationStoryblok>,
+    configuration: configRes.data.story as ISbStoryData<ConfigurationStoryblok>,
     careers: await fetchCareers({ version, fetch }),
     awards: await fetchAwards({ version, fetch }),
     awardsTypes: await fetchAwardsTypes({ version, fetch }),

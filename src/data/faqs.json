@@ -1,0 +1,28 @@
+{
+  "faqs": [
+    {
+      "_uid": "faq-1",
+      "question": "Why should I work with Significa?",
+      "answer_html": "<p>It's open, structured, collaborative, and built on trust. We work as one team, using tools like Slack and Notion to keep <a href=\"/handbook/communication/\">communication</a> flowing and ensure you're always in the loop, from progress updates to budget tracking and team allocation. This helps us stay aligned, avoid surprises, and <a href=\"/blog/how-quality-assurance-elevates-design-development-and-ux\">deliver the best results</a> from Discovery to Launch.</p>",
+      "answer": "It's open, structured, collaborative, and built on trust. We work as one team, using tools like Slack and Notion to keep communication flowing and ensure you're always in the loop, from progress updates to budget tracking and team allocation. This helps us stay aligned, avoid surprises, and deliver the best results from Discovery to Launch."
+    },
+    {
+      "_uid": "faq-2",
+      "question": "What is it like to collaborate with Significa?",
+      "answer_html": "<p>Because you'll get a fully dedicated team, a <a href=\"/handbook/how-we-collaborate/\">tailor-made approach</a>, and the quality you'd expect from an award-winning design agency. We treat your product like our own, designing it around real users and building it to grow with your business. Still unsure if an agency is the right fit? We've written <a href=\"/blog/hire-agency-freelancer-or-in-house\">this article</a> to help you decide.</p>",
+      "answer": "Because you'll get a fully dedicated team, a tailor-made approach, and the quality you'd expect from an award-winning design agency. We treat your product like our own, designing it around real users and building it to grow with your business."
+    },
+    {
+      "_uid": "faq-3",
+      "question": "How long does a project take from start until launch?",
+      "answer_html": "<p>It depends on the project's size and complexity, but most take between 3 and 6 months from kick-off to launch. We break things down into phases, so there's always clarity on what's happening, what's next, and when it's due. If you're looking for quick wins or MVPs, we'll help define the most efficient path forward with cost and timeline <a href=\"/handbook/billing-and-invoicing/\">estimates</a>.</p>",
+      "answer": "It depends on the project's size and complexity, but most take between 3 and 6 months from kick-off to launch. We break things down into phases, so there's always clarity on what's happening, what's next, and when it's due."
+    },
+    {
+      "_uid": "faq-4",
+      "question": "Which projects do you usually take on?",
+      "answer_html": "<p>We build <a href=\"/handbook/why-we-design\">design-led</a> digital products, from custom e-commerce platforms to web and mobile apps, and marketing websites built on scalable, custom design systems. Our projects often involve integrating complex inventory logics, managing platform migrations, and optimising digital products for usability, performance, and conversions.</p>",
+      "answer": "We build design-led digital products, from custom e-commerce platforms to web and mobile apps, and marketing websites built on scalable, custom design systems. Our projects often involve integrating complex inventory logics, managing platform migrations, and optimising digital products for usability, performance, and conversions."
+    }
+  ]
+}

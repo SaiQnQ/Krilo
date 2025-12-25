@@ -1,0 +1,76 @@
+{
+  "story": {
+    "id": 998,
+    "uuid": "config-handbook-uuid",
+    "name": "Handbook Navigation",
+    "slug": "handbook-navigation",
+    "full_slug": "configuration/handbook-navigation",
+    "sort_by_date": "2024-01-01T00:00:00.000Z",
+    "published_at": "2024-01-01T00:00:00.000Z",
+    "first_published_at": "2024-01-01T00:00:00.000Z",
+    "content": {
+      "_uid": "handbook-config-root",
+      "component": "configuration",
+      "primary_navigation": [
+        {
+          "_uid": "handbook-nav-home",
+          "component": "navigation-link",
+          "label": "Home",
+          "link": {
+            "cached_url": "/",
+            "linktype": "story"
+          }
+        },
+        {
+          "_uid": "handbook-nav-handbook",
+          "component": "navigation-link",
+          "label": "Handbook",
+          "link": {
+            "cached_url": "handbook/",
+            "linktype": "story"
+          }
+        }
+      ],
+      "secondary_navigation": [
+        {
+          "_uid": "handbook-nav-careers",
+          "component": "navigation-link",
+          "label": "Careers",
+          "link": {
+            "cached_url": "careers/",
+            "linktype": "story"
+          }
+        }
+      ],
+      "footer": {
+        "_uid": "handbook-footer-root",
+        "component": "footer",
+        "footer_columns": [
+          {
+            "_uid": "handbook-footer-col-1",
+            "component": "footer-column",
+            "title": "Links",
+            "links": [
+              {
+                "_uid": "handbook-footer-link-1",
+                "component": "footer-link",
+                "label": "Home",
+                "link": {
+                  "cached_url": "/",
+                  "linktype": "story"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "alternates": [],
+    "default_full_slug": "configuration/handbook-navigation",
+    "parent_id": null,
+    "group_id": "configuration",
+    "position": 1,
+    "is_startpage": false,
+    "tag_list": []
+  }
+}

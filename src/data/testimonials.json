@@ -1,0 +1,89 @@
+{
+  "testimonials": [
+    {
+      "_uid": "testimonial-1",
+      "name": "Rafael Sardinha",
+      "role": "CEO at Bion",
+      "quote": "Significa's impressive expertise and strategy advisory were crucial to achieving our goals. The experience was great in all dimensions.",
+      "image": {
+        "id": 7429590,
+        "alt": "Rafael Sardinha",
+        "name": "rafaelsardinha.jpeg",
+        "focus": "center",
+        "title": "",
+        "source": "external",
+        "copyright": "",
+        "is_external_url": false
+      },
+      "image_url": "https://a.storyblok.com/f/198185/800x800/732d42fd39/rafaelsardinha.jpeg"
+    },
+    {
+      "_uid": "testimonial-2",
+      "name": "Cancan Liu",
+      "role": "CEO at allO",
+      "quote": "Working with Significa was an amazing experience. We have built an amazing brand together and look forward to working on more exciting projects with you all.",
+      "image": {
+        "id": 8855555,
+        "alt": "Cancan Liu",
+        "name": "captura-de-ecra-2023-05-05-as-16-20-39.png",
+        "focus": "center",
+        "title": "",
+        "source": "external",
+        "copyright": "",
+        "is_external_url": false
+      },
+      "image_url": "https://a.storyblok.com/f/198185/862x860/ec889ada8a/captura-de-ecra-2023-05-05-as-16-20-39.png"
+    },
+    {
+      "_uid": "testimonial-3",
+      "name": "Arjun Paul",
+      "role": "Founder and CEO at Zoko",
+      "quote": "Genuinely, your great design has helped us in 100 places. Was one of the best investments we made.",
+      "image": {
+        "id": 8855752,
+        "alt": "Arjun Paul",
+        "name": "screenshot-2023-05-05-at-16-43-30.png",
+        "focus": "center",
+        "title": "",
+        "source": "external",
+        "copyright": "",
+        "is_external_url": false
+      },
+      "image_url": "https://a.storyblok.com/f/198185/483x458/88be37ba7d/screenshot-2023-05-05-at-16-43-30.png"
+    },
+    {
+      "_uid": "testimonial-4",
+      "name": "Zac Framson",
+      "role": "CEO at EverydayFinds",
+      "quote": "The quality of their design is unmatched, and they are fantastic at branding and UI design.",
+      "image": {
+        "id": 8897152,
+        "alt": "Zac Framson",
+        "name": "zacframson.jpeg",
+        "focus": "center",
+        "title": "",
+        "source": "external",
+        "copyright": "",
+        "is_external_url": false
+      },
+      "image_url": "https://a.storyblok.com/f/198185/800x800/0d907e08fe/zacframson.jpeg"
+    },
+    {
+      "_uid": "testimonial-5",
+      "name": "Thomas Hung",
+      "role": "Founder and CEO at Oopsie",
+      "quote": "I really enjoy working with Significa: the professionalism, the trust and how considerate you've been throughout the project. I'm really grateful!",
+      "image": {
+        "id": 7429735,
+        "alt": "Thomas Hung",
+        "name": "thomashung.jpeg",
+        "focus": "center",
+        "title": "",
+        "source": "external",
+        "copyright": "",
+        "is_external_url": false
+      },
+      "image_url": "https://a.storyblok.com/f/198185/658x658/0ebede9e90/thomashung.jpeg"
+    }
+  ]
+}

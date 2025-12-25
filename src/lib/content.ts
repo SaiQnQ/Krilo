@@ -1,5 +1,17 @@
 import type { ISbResult, ISbStoriesParams, ISbStoryData } from '@storyblok/js';
 import { getStoryblok, handleStoryblokError } from '$lib/storyblok';
+import {
+  getPageBySlug,
+  getAllBlogPosts,
+  getBlogPostBySlug,
+  getAllProjects,
+  getAllCareers,
+  getAllTeamMembers,
+  getAllAwards,
+  getAllHandbookChapters,
+  getConfiguration,
+  getHandbookConfiguration
+} from '$lib/data-local';
 import type {
   BlogPostStoryblok,
   CareerStoryblok,
@@ -8,10 +20,12 @@ import type {
   TeamMemberStoryblok,
   LandingPageStoryblok,
   RecognitionStoryblok,
-  HandbookStoryblok
+  HandbookStoryblok,
+  ConfigurationStoryblok
 } from '$types/bloks';
 import { HOME_SLUG } from './constants';
 import { error } from '@sveltejs/kit';
+import { env } from '$env/dynamic/public';
 
 export const PAGE_PARAMS = {
   resolve_links: 'url',
@@ -52,9 +66,64 @@ export const AWARDS_TYPES_PARAMS = {
   content_type: 'recognition-type'
 };
 
+/**
+ * Determine if we should use local data instead of API calls
+ */
+export function useLocalData(): boolean {
+  return (
+    env.USE_LOCAL_DATA === 'true' ||
+    env.PUBLIC_STORYBLOK_TOKEN === 'disabled_use_local_data' ||
+    !env.PUBLIC_STORYBLOK_TOKEN
+  );
+}
+
+/**
+ * Fetch site configuration (navigation, footer, etc.)
+ */
+export const fetchConfiguration = async (
+  options: { version?: 'draft' | 'published'; fetch?: typeof fetch } = {}
+) => {
+  if (useLocalData()) {
+    const config = getConfiguration();
+    if (!config) throw error(500, 'Configuration not found');
+    return { data: { story: config as ISbStoryData<ConfigurationStoryblok> } };
+  }
+
+  const storyblok = getStoryblok({ fetch: options.fetch || fetch });
+  return await storyblok.get('cdn/stories/configuration', {
+    version: options.version || 'published',
+    resolve_relations:
+      'configuration.primary_navigation,configuration.secondary_navigation,footer-column-internal.links'
+  });
+};
+
+/**
+ * Fetch handbook configuration
+ */
+export const fetchHandbookConfiguration = async (
+  options: { version?: 'draft' | 'published'; fetch?: typeof fetch } = {}
+) => {
+  if (useLocalData()) {
+    const config = getHandbookConfiguration();
+    if (!config) throw error(500, 'Handbook configuration not found');
+    return { data: { story: config as ISbStoryData<ConfigurationStoryblok> } };
+  }
+
+  const storyblok = getStoryblok({ fetch: options.fetch || fetch });
+  return await storyblok.get('cdn/stories/configuration/handbook-navigation', {
+    version: options.version || 'published',
+    resolve_relations:
+      'configuration.primary_navigation,configuration.secondary_navigation,footer-column-internal.links'
+  });
+};
+
 export const fetchCareers = async (
   options: { version?: 'draft' | 'published'; fetch?: typeof fetch } = {}
 ) => {
+  if (useLocalData()) {
+    return getAllCareers() as ISbStoryData<CareerStoryblok>[];
+  }
+
   const storyblok = getStoryblok({ fetch: options.fetch || fetch });
 
   const {
@@ -71,6 +140,10 @@ export const fetchCareers = async (
 export const fetchAwards = async (
   options: { version?: 'draft' | 'published'; fetch?: typeof fetch } = {}
 ) => {
+  if (useLocalData()) {
+    return getAllAwards() as ISbStoryData<RecognitionStoryblok>[];
+  }
+
   const storyblok = getStoryblok({ fetch: options.fetch || fetch });
 
   const {
@@ -87,6 +160,10 @@ export const fetchAwards = async (
 export const fetchAwardsTypes = async (
   options: { version?: 'draft' | 'published'; fetch?: typeof fetch } = {}
 ) => {
+  if (useLocalData()) {
+    return getAllAwards() as ISbStoryData<RecognitionStoryblok>[];
+  }
+
   const storyblok = getStoryblok({ fetch: options.fetch || fetch });
 
   const {
@@ -103,6 +180,11 @@ export const fetchAwardsTypes = async (
 export const fetchBlogPosts = async (
   options: { version?: 'draft' | 'published'; fetch?: typeof fetch; url?: URL } = {}
 ) => {
+  if (useLocalData()) {
+    const posts = getAllBlogPosts();
+    return { data: { stories: posts } };
+  }
+
   const storyblok = getStoryblok({ fetch: options.fetch || fetch });
 
   return storyblok.get('cdn/stories', {
@@ -121,6 +203,10 @@ export const fetchBlogPosts = async (
 export const fetchHomeBlogPosts = async (
   options: { version?: 'draft' | 'published'; fetch?: typeof fetch; url?: URL } = {}
 ) => {
+  if (useLocalData()) {
+    return getAllBlogPosts(3);
+  }
+
   const storyblok = getStoryblok({ fetch: options.fetch || fetch });
 
   const res = await storyblok.get('cdn/stories', {
@@ -143,6 +229,10 @@ export const fetchHomeBlogPosts = async (
 export const fetchTeamMembers = async (
   options: { version?: 'draft' | 'published'; fetch?: typeof fetch; url?: URL } = {}
 ) => {
+  if (useLocalData()) {
+    return getAllTeamMembers();
+  }
+
   const storyblok = getStoryblok({ fetch: options.fetch || fetch });
 
   const res = await storyblok.get('cdn/stories', {
@@ -163,6 +253,10 @@ export const fetchTeamMembers = async (
 export const fetchProjects = async (
   options: { version?: 'draft' | 'published'; fetch?: typeof fetch } = {}
 ) => {
+  if (useLocalData()) {
+    return getAllProjects() as ISbStoryData<ProjectStoryblok>[];
+  }
+
   const storyblok = getStoryblok({ fetch: options.fetch || fetch });
 
   const res: { data: { stories: ISbStoryData<ProjectStoryblok>[] } } = await storyblok.get(
@@ -220,6 +314,62 @@ export async function fetchPage(options: {
   // remove leading slashes. svelte-kit's path params start with no slash, but links will have a leading slash
   const slug = options.slug.replace(/^\/+/, '');
 
+  // If using local data, try to find page locally
+  if (useLocalData()) {
+    let localStory: DynamicPage | null = null;
+
+    // For root path (empty slug), fetch home page
+    if (slug === '' || slug === HOME_SLUG) {
+      localStory = (getPageBySlug('') || null) as DynamicPage | null;
+    } else {
+      // Try to find in pages
+      localStory = (getPageBySlug(slug) || null) as DynamicPage | null;
+
+      // Try to find in blog posts
+      if (!localStory) {
+        localStory = (getBlogPostBySlug(slug) || null) as DynamicPage | null;
+      }
+
+      // Try to find in projects
+      if (!localStory) {
+        localStory = (getAllProjects().find((p) => p.slug === slug) || null) as DynamicPage | null;
+      }
+
+      // Try to find in careers
+      if (!localStory) {
+        localStory = (getAllCareers().find((c) => c.slug === slug) || null) as DynamicPage | null;
+      }
+
+      // Try to find in handbook
+      if (!localStory) {
+        localStory = (getAllHandbookChapters().find((h) => h.slug === slug) ||
+          null) as DynamicPage | null;
+      }
+    }
+
+    if (!localStory) {
+      throw error(404, `Page not found: ${slug || '/'}`);
+    }
+
+    // Return appropriate data structure based on story type
+    if (localStory.content?.component === 'blog-post') {
+      return {
+        story: localStory,
+        relatedPosts: getAllBlogPosts(3) as BlogPostPage[]
+      };
+    }
+
+    if (localStory.content?.component === 'project') {
+      return {
+        story: localStory,
+        relatedProjects: getAllProjects() as ProjectPage[]
+      };
+    }
+
+    return { story: localStory };
+  }
+
+  // Fallback to Storyblok API
   const storyblok = getStoryblok({ fetch: options.fetch || fetch });
 
   if (slug === HOME_SLUG) throw error(404);

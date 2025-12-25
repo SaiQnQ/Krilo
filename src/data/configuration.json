@@ -1,0 +1,65 @@
+{
+  "story": {
+    "id": 999,
+    "uuid": "config-uuid-001",
+    "name": "Configuration",
+    "slug": "configuration",
+    "full_slug": "configuration",
+    "sort_by_date": "2024-01-01T00:00:00.000Z",
+    "published_at": "2024-01-01T00:00:00.000Z",
+    "first_published_at": "2024-01-01T00:00:00.000Z",
+    "content": {
+      "_uid": "config-root",
+      "component": "configuration",
+      "primary_navigation": [
+        {
+          "_uid": "nav-about",
+          "name": "About",
+          "full_slug": "about"
+        },
+        {
+          "_uid": "nav-services",
+          "name": "Services",
+          "full_slug": "services"
+        },
+        {
+          "_uid": "nav-projects",
+          "name": "Projects",
+          "full_slug": "projects"
+        },
+        {
+          "_uid": "nav-blog",
+          "name": "Blog",
+          "full_slug": "blog"
+        }
+      ],
+      "secondary_navigation": [
+        {
+          "_uid": "nav-handbook",
+          "name": "Handbook",
+          "full_slug": "handbook"
+        },
+        {
+          "_uid": "nav-careers",
+          "name": "Careers",
+          "full_slug": "careers"
+        },
+        {
+          "_uid": "nav-contact",
+          "name": "Contact",
+          "full_slug": "contact"
+        }
+      ],
+      "footer": [],
+      "footer_partners": [],
+      "footer_columns": []
+    },
+    "alternates": [],
+    "default_full_slug": "configuration",
+    "parent_id": null,
+    "group_id": "configuration",
+    "position": 0,
+    "is_startpage": false,
+    "tag_list": []
+  }
+}
