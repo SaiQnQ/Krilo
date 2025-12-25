@@ -11,7 +11,6 @@ import {
     navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { cn, NAV_LINKS } from "@/utils";
-import { useClerk } from "@clerk/nextjs";
 import { LucideIcon, ZapIcon } from "lucide-react";
 import Link from "next/link";
 import React, { useEffect, useState } from 'react';
@@ -20,9 +19,6 @@ import MobileNavbar from "./mobile-navbar";
 import AnimationContainer from "../global/animation-container";
 
 const Navbar = () => {
-
-    const { user } = useClerk();
-
     const [scroll, setScroll] = useState(false);
 
     const handleScroll = () => {
@@ -50,10 +46,10 @@ const Navbar = () => {
                     <div className="flex items-center space-x-12">
                         <Link href="/#home">
                             <span className="text-lg font-bold font-heading !leading-none">
-                               
-                            <img src="\icons\logo.png" alt="Logo" className="h-8 w-8 mr-2 inline-block" />
+
+                            <img src="/icons/logo.png" alt="Logo" className="h-8 w-8 mr-2 inline-block" />
                                 Troika Hub
-                            
+
                             </span>
                         </Link>
 
@@ -115,24 +111,15 @@ const Navbar = () => {
                     </div>
 
                     <div className="hidden lg:flex items-center">
-                        {user ? (
-                            <div className="flex items-center">
-                                <Link href="/dashboard" className={buttonVariants({ size: "sm", })}>
-                                    Dashboard
-                                </Link>
-                            </div>
-                        ) : (
-                            <div className="flex items-center gap-x-4">
-                                <Link href="https://mail.google.com/mail/?view=cm&fs=1&to=troikahub@gmail.com" className={buttonVariants({ size: "sm", variant: "ghost" })}>
-                                    Wishlist
-                                </Link>
-                                <Link href="https://mail.google.com/mail/?view=cm&fs=1&to=troikahub@gmail.com" className={buttonVariants({ size: "sm", })}> 
-                                    Get in Touch
-                                    <ZapIcon className="size-3.5 ml-1.5 text-orange-500 fill-orange-500" />
-                                </Link>
-                            </div>
-                        )}
-                        {/* todo */}
+                        <div className="flex items-center gap-x-4">
+                            <Link href="https://mail.google.com/mail/?view=cm&fs=1&to=troikahub@gmail.com" className={buttonVariants({ size: "sm", variant: "ghost" })}>
+                                Wishlist
+                            </Link>
+                            <Link href="https://mail.google.com/mail/?view=cm&fs=1&to=troikahub@gmail.com" className={buttonVariants({ size: "sm", })}>
+                                Get in Touch
+                                <ZapIcon className="size-3.5 ml-1.5 text-orange-500 fill-orange-500" />
+                            </Link>
+                        </div>
                     </div>
 
                     <MobileNavbar />

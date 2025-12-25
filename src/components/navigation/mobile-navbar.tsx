@@ -14,14 +14,11 @@ import {
     SheetTrigger
 } from "@/components/ui/sheet";
 import { cn, NAV_LINKS } from "@/utils";
-import { useAuth } from "@clerk/nextjs";
-import { LucideIcon, Menu, X } from "lucide-react";
+import { LucideIcon, Menu, X, ZapIcon } from "lucide-react";
 import Link from "next/link";
 import React, { useState } from 'react';
 
 const MobileNavbar = () => {
-
-    const { isSignedIn, signOut } = useAuth();
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -45,20 +42,13 @@ const MobileNavbar = () => {
                     </SheetClose>
                     <div className="flex flex-col items-start w-full py-2 mt-10">
                         <div className="flex items-center justify-evenly w-full space-x-2">
-                            {isSignedIn ? (
-                                <Link href="/dashboard" className={buttonVariants({ variant: "outline", className: "w-full" })}>
-                                    Dashboard
-                                </Link>
-                            ) : (
-                                <>
-                                    <Link href="/auth/sign-in" className={buttonVariants({ variant: "outline", className: "w-full" })}>
-                                        Sign In
-                                    </Link>
-                                    <Link href="/auth/sign-up" className={buttonVariants({ className: "w-full" })}>
-                                        Sign Up
-                                    </Link>
-                                </>
-                            )}
+                            <Link href="https://mail.google.com/mail/?view=cm&fs=1&to=troikahub@gmail.com" className={buttonVariants({ size: "sm", variant: "ghost" })}>
+                                Wishlist
+                            </Link>
+                            <Link href="https://mail.google.com/mail/?view=cm&fs=1&to=troikahub@gmail.com" className={buttonVariants({ size: "sm", })}> 
+                                Get in Touch
+                                <ZapIcon className="size-3.5 ml-1.5 text-orange-500 fill-orange-500" />
+                            </Link>
                         </div>
                         <ul className="flex flex-col items-start w-full mt-6">
                             <Accordion type="single" collapsible className="!w-full">
